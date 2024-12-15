@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+      .todo-item {
+        flex: 1;
+      }
+      .remove-btn {
+        background: #e74c3c;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      .remove-btn:hover {
+        background: #c0392b;
+      }
+      .add-form {
+        display: flex;
+        margin-top: 20px;
+      }
+      .add-form input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .add-form button {
+        background: #3498db;
+        border: none;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 10px;
+      }
+      .add-form button:hover {
+        background: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <ul id="todo-list">
+        <!-- To-do items will be added here -->
+      </ul>
+      <form class="add-form" id="add-form">
+        <input
+          type="text"
+          id="todo-input"
+          placeholder="Add a new task"
+          required
+        />
+        <button type="submit">Add</button>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("add-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const input = document.getElementById("todo-input");
+          const task = input.value.trim();
+
+          if (task) {
+            const ul = document.getElementById("todo-list");
+            const li = document.createElement("li");
+
+            li.innerHTML = `
+      <input type="checkbox">
+      <span class="todo-item">${task}</span>
+      <button class="remove-btn">Remove</button>
+    `;
+
+            li.querySelector(".remove-btn").onclick = () => ul.removeChild(li);
+
+            ul.appendChild(li);
+            input.value = "";
+          }
+        });
+    </script>
+  </body>
+</html>
